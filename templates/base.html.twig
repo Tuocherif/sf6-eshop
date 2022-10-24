@@ -64,7 +64,12 @@
 				</div>
 			</div>
 		</nav>
-        {# Fin - Barre de navigation #}
-		{% block body %}{% endblock %}
-	</body>
-</html>
+		{# Fin - Barre de navigation #}
+
+		{# Block Twig - Body #}
+		<div class="container pt-5"> 
+            {% block body %}{% endblock %}
+		</div>
+		{# Fin - Block Twig - Body #}
+		</body>
+	</html>
