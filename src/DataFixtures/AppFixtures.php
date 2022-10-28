@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use Faker\Provider;
 use App\Entity\Product;
+use Liior\Faker\Prices;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -14,6 +15,10 @@ class AppFixtures extends Fixture
     {
         // Création du instance de 'Faker\Generator'
         $faker = Factory::create('fr_FR');
+        // Ajout de la librairie 'liorchamla/faker-prices'
+        $faker->addProvider(new Prices($faker));
+
+        // symfony console 
 
         // Création de 100 produits
         for ($p=0; $p < 100; $p++) { 
@@ -23,7 +28,7 @@ class AppFixtures extends Fixture
                 ->setPrice(mt_rand(100, 200))
                 ->setSlug("produit-$p") */
                 ->setName($faker->sentence())
-                ->setPrice($faker->randomNumber(3))
+                ->setPrice($faker->price(4000, 20000))
                 ->setSlug($faker->slug())
             ;
 
