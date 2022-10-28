@@ -2,10 +2,12 @@
 
 namespace App\DataFixtures;
 
+use Bezhanov;
 use Faker\Factory;
 use Faker\Provider;
 use App\Entity\Product;
 use Liior\Faker\Prices;
+use Bezhanov\Faker\Provider\Commerce;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -17,6 +19,8 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         // Ajout de la librairie 'liorchamla/faker-prices'
         $faker->addProvider(new Prices($faker));
+        // Ajout de la librairie 'mbezhanov/faker-provider-collection'
+        $faker->addProvider(new Commerce($faker));
 
         // symfony console 
 
@@ -27,7 +31,8 @@ class AppFixtures extends Fixture
                 /* ->setName("Produit No : $p")
                 ->setPrice(mt_rand(100, 200))
                 ->setSlug("produit-$p") */
-                ->setName($faker->sentence())
+                /* ->setName($faker->sentence()) */
+                ->setName($faker->productName)
                 ->setPrice($faker->price(4000, 20000))
                 ->setSlug($faker->slug())
             ;
