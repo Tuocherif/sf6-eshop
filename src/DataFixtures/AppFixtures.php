@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use Bezhanov;
 use Faker\Factory;
 use Faker\Provider;
@@ -27,23 +28,36 @@ class AppFixtures extends Fixture
         // Ajout de la librairie 'mbezhanov/faker-provider-collection'
         $faker->addProvider(new Commerce($faker));
 
-        // Création de 100 produits
-        for ($p=0; $p < 100; $p++) { 
-            $product = new Product();
-            $product
-                /* ->setName("Produit No : $p")
-                ->setPrice(mt_rand(100, 200))
-                ->setSlug("produit-$p") */
-                /* ->setName($faker->sentence()) */
-                ->setName($faker->productName)
-                ->setPrice($faker->price(4000, 20000))
-                /* ->setSlug($faker->slug()) */
-                ->setSlug(strtolower($this->slugger->slug($product->getName())))
+        // Création de 3 catégories
+        for ($c=0; $c < 3; $c++) { 
+            $category = new Category();
+            $category
+                ->setName($faker->department)
+                ->setSlug(strtolower($this->slugger->slug($category->getName())))
             ;
 
-            // Préparation de la migration vers la Base de données
-            $manager->persist($product);
+            // Création d'un nombre aléatoire de produits
+            for ($p=0; $p < mt_rand(5, 20); $p++) { 
+                $product = new Product();
+                $product
+                    /* ->setName("Produit No : $p")
+                    ->setPrice(mt_rand(100, 200))
+                    ->setSlug("produit-$p") */
+                    /* ->setName($faker->sentence()) */
+                    ->setName($faker->productName)
+                    ->setPrice($faker->price(4000, 20000))
+                    /* ->setSlug($faker->slug()) */
+                    ->setSlug(strtolower($this->slugger->slug($product->getName())))
+                    ->setCategory($category)
+                ;
+    
+                // Préparation de la migration vers la Base de données
+                $manager->persist($product);
+            }
+
+            $manager->persist($category);
         }
+
 
         // Envoie des 100 produits vers la Base de données
         $manager->flush();
