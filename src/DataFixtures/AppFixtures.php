@@ -27,8 +27,6 @@ class AppFixtures extends Fixture
         // Ajout de la librairie 'mbezhanov/faker-provider-collection'
         $faker->addProvider(new Commerce($faker));
 
-        // symfony console 
-
         // Création de 100 produits
         for ($p=0; $p < 100; $p++) { 
             $product = new Product();
