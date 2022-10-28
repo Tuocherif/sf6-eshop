@@ -10,9 +10,14 @@ use Liior\Faker\Prices;
 use Bezhanov\Faker\Provider\Commerce;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(protected SluggerInterface $slugger)
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
         // Création du instance de 'Faker\Generator'
@@ -34,7 +39,8 @@ class AppFixtures extends Fixture
                 /* ->setName($faker->sentence()) */
                 ->setName($faker->productName)
                 ->setPrice($faker->price(4000, 20000))
-                ->setSlug($faker->slug())
+                /* ->setSlug($faker->slug()) */
+                ->setSlug(strtolower($this->slugger->slug($product->getName())))
             ;
 
             // Préparation de la migration vers la Base de données
