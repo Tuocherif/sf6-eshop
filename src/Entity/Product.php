@@ -27,10 +27,10 @@ class Product
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Picture = null;
+    private ?string $picture = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Description = null;
+    private ?string $description = null;
 
     public function getId(): ?int
     {
