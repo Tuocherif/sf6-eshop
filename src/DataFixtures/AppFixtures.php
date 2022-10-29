@@ -51,6 +51,7 @@ class AppFixtures extends Fixture
                     /* ->setSlug($faker->slug()) */
                     ->setSlug(strtolower($this->slugger->slug($product->getName())))
                     ->setCategory($category)
+                    ->setDescription($faker->paragraph())
                 ;
     
                 // Préparation de la migration vers la Base de données

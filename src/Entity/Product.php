@@ -85,26 +85,26 @@ class Product
         return $this;
     }
 
-    public function getProductPicture(): ?string
+    public function getPicture(): ?string
     {
-        return $this->productPicture;
+        return $this->picture;
     }
 
-    public function setProductPicture(string $productPicture): self
+    public function setPicture(string $picture): self
     {
-        $this->productPicture = $productPicture;
+        $this->picture = $picture;
 
         return $this;
     }
 
-    public function getProductDescription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->productDescription;
+        return $this->description;
     }
 
-    public function setProductDescription(string $productDescription): self
+    public function setDescription(string $description): self
     {
-        $this->productDescription = $productDescription;
+        $this->description = $description;
 
         return $this;
     }
