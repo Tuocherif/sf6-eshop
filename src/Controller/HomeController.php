@@ -10,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function homepage(ProductRepository $pRepo): Response
+    public function homepage(ProductRepository $prodRepo): Response
     {
         // On récupère 3 produits depuis DB
-        $products = $pRepo->findBy([], [], 3);
+        $products = $prodRepo->findBy([], [], 3);
 
         /* dd($products); */
 
