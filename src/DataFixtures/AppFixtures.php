@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use Bezhanov;
 use Faker\Factory;
 use Faker\Provider;
 use App\Entity\Product;
 use Liior\Faker\Prices;
+use App\Entity\Category;
 use Bezhanov\Faker\Provider\Commerce;
+use Bluemmb\Faker\PicsumPhotosProvider;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -27,6 +28,8 @@ class AppFixtures extends Fixture
         $faker->addProvider(new Prices($faker));
         // Ajout de la librairie 'mbezhanov/faker-provider-collection'
         $faker->addProvider(new Commerce($faker));
+        // Ajout de la librairie 'bluemmb/Faker-PicsumPhotos'
+        $faker->addProvider(new PicsumPhotosProvider($faker));
 
         // Création de 3 catégories
         for ($c=0; $c < 3; $c++) { 
@@ -52,6 +55,7 @@ class AppFixtures extends Fixture
                     ->setSlug(strtolower($this->slugger->slug($product->getName())))
                     ->setCategory($category)
                     ->setDescription($faker->paragraph())
+                    ->setPicture($faker->imageUrl(400, 400, true))
                 ;
     
                 // Préparation de la migration vers la Base de données
