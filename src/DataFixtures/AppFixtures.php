@@ -36,6 +36,8 @@ class AppFixtures extends Fixture
                 ->setSlug(strtolower($this->slugger->slug($category->getName())))
             ;
 
+            // symfony console 
+
             // Création d'un nombre aléatoire de produits
             for ($p=0; $p < mt_rand(5, 20); $p++) { 
                 $product = new Product();
