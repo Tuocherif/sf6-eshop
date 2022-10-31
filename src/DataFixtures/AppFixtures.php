@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
 
             // symfony console 
 
-            // Création d'un nombre aléatoire (entre 30 et 50) de produits
+            // Pour chaque catégorie créée, création d'un nombre aléatoire (entre 30 et 50) de produits
             for ($p=0; $p < mt_rand(30, 50); $p++) { 
                 $product = new Product();
                 $product
@@ -66,7 +66,7 @@ class AppFixtures extends Fixture
         }
 
 
-        // Envoie des 100 produits vers la Base de données
+        // Envoie des données vers la Base de données
         $manager->flush();
 
     }
