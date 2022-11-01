@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
 
 {% block title %}Accueil | SF6 - Eshop
 {% endblock %}
@@ -17,14 +17,19 @@
 						<h4 class="card-title">{{ p.name }}
 							({{ (p.price)/100 }}
 							&euro;)</h4>
-						
+
 						<span class="badge bg-info">
-							{{ p.category.name }} 
+							{{ p.category.name }}
 						</span>
 
 						<p class="card-text">{{ p.description }}</p>
 
-						<a href="#" class="btn btn-primary btn-sm">Détails</a>
+						<a href="{{path("product_showproduct", { 
+							"category_slug": p.category.slug, 
+							"slug": p.slug })
+						}}" 
+						class="btn btn-primary btn-sm">
+							Détails</a>
 
 						<a href="#" class="btn btn-success btn-sm">Ajouter</a>
 					</div>
@@ -37,25 +42,25 @@
 
 	<hr>
 
-	{# Zone d'incitation à l'achat #}
+	{# Zone d"incitation à l"achat #}
 	<h2>Un service irréprochable</h2>
 	<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem rerum eligendi ipsam quo quisquam ad!</p>
 
 	<div class="row">
 		{% include "shared/_purchase-incentive.html.twig" with {
-            'color': 'primary',
-            'icone': 'fas fa-truck',
-            'text': "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
+            "color": "primary",
+            "icone": "fas fa-truck",
+            "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
         } %}
 		{% include "shared/_purchase-incentive.html.twig" with {
-            'color': 'success',
-            'icone': 'fas fa-check',
-            'text': "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
+            "color": "success",
+            "icone": "fas fa-check",
+            "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
         } %}
 		{% include "shared/_purchase-incentive.html.twig" with {
-            'color': 'warning',
-            'icone': 'fas fa-lock',
-            'text': "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
+            "color": "warning",
+            "icone": "fas fa-lock",
+            "text": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque repudiandae, optio nisi magnam qui reprehenderit?"
         } %}
 	</div>
 
