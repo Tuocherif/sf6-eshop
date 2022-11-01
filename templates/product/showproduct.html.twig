@@ -6,6 +6,17 @@
 {% endblock %}
 
 {% block body %}
+	{# symfony console  #}
+	{# Fil d'Ariane #}
+		<ol class="breadcrumb"> <li class="breadcrumb-item">
+			<a href="{{path('homepage')}}">Accueil</a>
+		</li>
+		<li class="breadcrumb-item">
+			<a href="{{path('product_showcategory', {'slug': product.category.slug})}}">{{product.category.name}}</a>
+		</li>
+		<li class="breadcrumb-item active">{{product.name}}</li>
+	</ol>
+
 	<h1>{{product.name}}
 		({{product.price / 100}}
 		&euro;)</h1>
@@ -15,8 +26,8 @@
 		</div>
 		<div class="col">
 			<span class="badge bg-primary">
-                {{product.category.name}}
-            </span>
+				{{product.category.name}}
+			</span>
 			<p>{{product.description}}</p>
 			<a href="#" class="btn btn-success btn-lg">
 				<i class="fas fa-shopping-cart"></i>

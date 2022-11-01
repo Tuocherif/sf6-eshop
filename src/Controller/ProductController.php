@@ -8,11 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('/{slug}', name: 'product_category')]
-    public function category($slug, CategoryRepository $catRepo): Response
+    // Action permettant d'afficher une "Category"
+    #[Route('/{slug}', name: 'product_showcategory')]
+    public function showCategory($slug, CategoryRepository $catRepo): Response
     {
         $category = $catRepo->findOneBy(['slug' => $slug]);
 
@@ -23,17 +25,31 @@ class ProductController extends AbstractController
             /* throw new NotFoundHttpException(
                 "La catégorie demandée n'existe pas."
             ); */
-            throw $this->createNotFoundException("La catégorie demandée n'existe pas.");
+            throw $this->createNotFoundException(
+                "La catégorie demandée n'existe pas."
+            );
         }
 
-        return $this->render('product/category.html.twig', compact('slug', 'category'));
+        return $this->render(
+            'product/showcategory.html.twig',
+            compact('slug', 'category')
+        );
     }
 
+    // Action permettant d'afficher un "Product"
     #[Route('/{category_slug}/{slug}', name: 'product_showproduct')]
-    public function showProduct($slug, ProductRepository $prodRepo)
+    public function showProduct(
+        $slug, 
+        ProductRepository $prodRepo,
+        UrlGeneratorInterface $urlGenerator
+    )
     {
-        $product = $prodRepo->findOneBy([
+        /* dd($urlGenerator->generate('product_category', [
             'slug' => $slug
+        ])); */
+
+        $product = $prodRepo->findOneBy([
+            'slug' => $slug,
         ]);
 
         // Si le produit n'est pas trouvé, on lance une exception
@@ -41,9 +57,14 @@ class ProductController extends AbstractController
             /* throw new NotFoundHttpException(
                 "La catégorie demandée n'existe pas."
             ); */
-            throw $this->createNotFoundException("Le produit demandée n'existe pas.");
+            throw $this->createNotFoundException(
+                "Le produit demandée n'existe pas."
+            );
         }
 
-        return $this->render('product/showproduct.html.twig', compact('product'));
+        return $this->render(
+            'product/showproduct.html.twig',
+            compact('product', 'urlGenerator')
+        );
     }
 }
